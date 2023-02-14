@@ -58,7 +58,7 @@ class BookController extends Controller
 
             $book = Book::create($request->all());
             $book->author()->attach($author_id);
-            return response()->json(['message'=>'Done']);
+            return response()->json(['message'=>'Done','book'=>$book,'author'=>$book->author]);
 
         }catch(Exception $e){
 
