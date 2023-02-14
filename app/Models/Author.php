@@ -14,4 +14,9 @@ class Author extends Model
         'city',
         'dni',
     ];
+
+    // Relacion N:N
+    public function book() {
+        return $this->belongsTo(Book::class)->withTimestamps();
+    }
 }

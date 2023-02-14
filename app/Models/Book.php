@@ -12,9 +12,19 @@ class Book extends Model
     protected $fillable = [
         'title',
         'description',
+        'user_id',
     ];
 
     public function getDescriptionAttribute($value){
         return substr($value, 1, 120);
+    }
+
+    // Relacion 1:N - N Book 1 User
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    // Relacion N:N
+    public function author() {
+        return $this->belongsToMany(Author::class)->withTimestamps();
     }
 }

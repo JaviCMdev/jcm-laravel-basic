@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Relacion 1:N - 1 User N Book
+    public function book() {
+        return $this->hasMany(Book::class);
+    }
 }

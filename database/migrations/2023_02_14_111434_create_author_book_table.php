@@ -13,16 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('author_book', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
             $table->timestamps();
-            // FK reference
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
+            // Referencia N:N
+            $table->unsignedBigInteger('book_id');
+            $table->foreign('book_id')
                 ->references('id')
-                ->on('users')
+                ->on('books')
+                ->delete('cascade');
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')
+                ->references('id')
+                ->on('authors')
                 ->delete('cascade');
         });
     }
@@ -34,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('books_authors');
     }
 };
